@@ -21,6 +21,7 @@ if(!empty($location->elements)){
 
 $request = array(
     "url" => $query[$_POST["type"]],
-    "data" => $geojson);
+    "data" => $geojson
+);
 echo json_encode($request);
 ?>

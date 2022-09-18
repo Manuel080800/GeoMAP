@@ -10,6 +10,7 @@ if (!isset($_POST["lat1"], $_POST["lat2"], $_POST["lon1"], $_POST["lon2"])){
 $amenity = array();
 $highway = array();
 $ways = array();
+$json_data = null;
 
 $query= array('https://www.overpass-api.de/api/interpreter?data=[out:json];(node["highway"]('.$_POST["lat1"].','.$_POST["lon1"].','.$_POST["lat2"].','.$_POST["lon2"].');node["amenity"]('.$_POST["lat1"].','.$_POST["lon1"].','.$_POST["lat2"].','.$_POST["lon2"].');node(w)->.x;);out;',
               'https://www.overpass-api.de/api/interpreter?data=[out:json];(way["highway"]('.$_POST["lat1"].','.$_POST["lon1"].','.$_POST["lat2"].','.$_POST["lon2"].');node(w)->.x;);out;');
@@ -64,7 +65,8 @@ $request = array(
     "amenity"=> $amenity,
     "highway"=> $highway,
     "way"=> $ways,
-    "url"=> $query[0]
+    "url"=> $query[0],
+    "data" => $json_data
 );
 
 echo json_encode($request);

@@ -1,6 +1,7 @@
 function removeAllMap (all, modal, home) {
     removeMap();
     $("#address").val("");
+    markerMap['data'] = null;
     resetSearchOption();
     mapLayers = [];
     document.getElementById("inner-layers").innerHTML = "";
@@ -109,4 +110,15 @@ function resetSearchOption() {
     resetOptions("amenity");
     resetOptions("highway");
     resetOptions("way");
+}
+
+function downloadGeoJSON () {
+    if (markerMap['data']) download("GeoJSON.json", JSON.stringify(markerMap['data']));
+}
+
+function viewGeoJSON () {
+    if (markerMap['data']) {
+        let view = window.open("");
+        view.document.write(JSON.stringify(markerMap['data']));
+    }
 }

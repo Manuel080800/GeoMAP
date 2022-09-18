@@ -17,6 +17,7 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
                 addOptions("highway", elememts[1]);
                 addOptions("way", elememts[2]);
                 $("#address").val(elememts[3]);
+                markerMap['data'] = elememts[4];
                 if (end) finish();
             } catch (error) {
                 console.log(error)
@@ -73,6 +74,7 @@ function drawItemSelect (option, name, modal) {
                     }
                 }
                 $("#address").val(elememts[0]);
+                markerMap['data'] = elememts[1];
 
                 const colorMarket = generateRandomColor(false);
                 const colorWay = option !== 2 ? "#" + colorMarket : generateRandomColor(true);

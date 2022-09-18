@@ -52,11 +52,11 @@
                            aria-label="" aria-describedby="basic-addon1" placeholder="URL de la consulta" disabled>
                 </li>
                 <li class="nav-item spacing-inter">
-                    <a href="newfile2.json" target="_blank"
+                    <a href="javascript:viewGeoJSON()"
                        class="size_Element btn btn-outline-secondary mb-3 spacing text-nowrap" type="button">Ver archivo</a>
                 </li>
                 <li class="nav-item spacing-inter">
-                    <a href="newfile2.json" download="export.Geojson"
+                    <a href="javascript:downloadGeoJSON()"
                        class="size_Element btn btn-outline-secondary mb-3 spacing text-nowrap" type="button">Descargar
                         archivo</a>
                 </li>
