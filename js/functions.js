@@ -24,3 +24,12 @@ function removeOptions (element) {
         menu.remove(i);
     }
 }
+
+function resetOptions (element) {
+    let menu = document.getElementById(element);
+    menu.value = 'Choose...';
+}
+
+function toogleMessage () {
+    $("#message-modal").modal('toggle');
+}

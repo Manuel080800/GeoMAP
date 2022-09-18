@@ -1,7 +1,8 @@
-function addLocationMap (lat1, lat2, lon1, lon2, modal) {
+function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
     if (modal) loading();
-    $.post(server + "/geomap/0.1.php", {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2}).done(
+    $.post(server + "0.1.php", {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2}).done(
         function (result) {
+            console.log(result)
             try {
                 let requestPHP = JSON.parse(result);
                 let elememts = [];
@@ -16,10 +17,10 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal) {
                 addOptions("highway", elememts[1]);
                 addOptions("way", elememts[2]);
                 $("#address").val(elememts[3]);
-                if (modal) finish();
+                if (end) finish();
             } catch (error) {
                 console.log(error)
-                if (modal) finish();
+                if (end) finish();
             }
         }
     );
@@ -57,13 +58,26 @@ function drawItemSelect (option, name, modal) {
         layer.bindPopup(popupContent);
     }
     
-    $.post(server + "/geomap/cerounoC.php", { "unidad": select, "search": option }).done(
+    $.post(server + "0.2.php", {"name": select, "type": option, "lat1": markerMap['location'][0],
+        "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]}).done(
         function (result) {
+            console.log(result)
             try {
+
+                let requestPHP = JSON.parse(result);
+                let elememts = [];
+
+                for (element in requestPHP) {
+                    if (element !== null) {
+                        elememts.push(requestPHP[element]);
+                    }
+                }
+                $("#address").val(elememts[0]);
+
                 const colorMarket = generateRandomColor(false);
                 const colorWay = option !== 2 ? "#" + colorMarket : generateRandomColor(true);
 
-                const geo = L.geoJson.ajax("newfile2.json", {
+                const geo = L.geoJSON(elememts[1], {
                     pointToLayer: function (feature, latlng) {
                         const icon = new L.Icon({
                             iconUrl: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + colorMarket + '&chf=a,s,ee00FFFF',
@@ -92,15 +106,6 @@ function drawItemSelect (option, name, modal) {
                 mapLayers.push(struture);
                 updateComponents();
 
-                let requestPHP = JSON.parse(result);
-                let elememts = [];
-
-                for (element in requestPHP) {
-                    if (element !== null) {
-                        elememts.push(requestPHP[element]);
-                    }
-                }
-                $("#address").val(elememts[0]);
                 if (modal) finish();
 
             } catch (error) {

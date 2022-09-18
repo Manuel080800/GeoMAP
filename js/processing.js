@@ -1,17 +1,15 @@
 function removeAllMap (all, modal, home) {
     removeMap();
     $("#address").val("");
-    removeSearchOption();
+    resetSearchOption();
     mapLayers = [];
     document.getElementById("inner-layers").innerHTML = "";
     hideShare();
 
-    if(shareMap['share']) {
-        removeCap(shareMap['share']);
-        shareMap['location'] = [];
-    }
-
     if (all) {
+        removeSearchOption();
+        removeCap(markerMap['market']);
+        removeCap(markerMap['position']);
         markerMap['location'] = [];
         removeDraw();
     }
@@ -25,7 +23,7 @@ function removeMap () {
 }
 
 function removeCap (layer) {
-    layer.removeFrom(map);
+    if (layer) layer.removeFrom(map);
 }
 
 function removeDraw () {
@@ -105,4 +103,10 @@ function removeSearchOption() {
     removeOptions("amenity");
     removeOptions("highway");
     removeOptions("way");
+}
+
+function resetSearchOption() {
+    resetOptions("amenity");
+    resetOptions("highway");
+    resetOptions("way");
 }

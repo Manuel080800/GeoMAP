@@ -11,11 +11,11 @@ function getLocation () {
         '</div>' +
         '<div class="modal-body">' +
         'Seleccione el nivel de radio a explorar: <br/><br/>' +
-        '<label for="ranger-radio" class="form-label" id="currentRange">Rango actual: 500 metros.</label>' +
-        "<input type='range' style='width: 100%' class='form-range' min='100' max='1000' value='500' oninput='updateRank(this.value)'>" +
+        '<label for="input-range" class="form-label" id="currentRange">Rango actual: 500 metros.</label>' +
+        "<input id='input-range' type='range' style='width: 100%' class='form-range' min='100' max='1000' value='500' oninput='updateRank(this.value)'>" +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-primary"' + " onclick='" + 'ubicarMapa()' + "'>Aceptar</button>'" +
+        '<button type="button" class="btn btn-primary"' + " onclick='" + 'locationUser()' + "'>Aceptar</button>'" +
         '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>' +
         '</div>' +
         '</div>' +

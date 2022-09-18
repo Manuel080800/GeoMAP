@@ -1,12 +1,9 @@
 let id = null;
 let mapLayers = [];
-let server = "http://localhost:63342";
+let server = "http://localhost:63342/geomap/";
 
 let markerMap = {
+    market: null,
+    position: null,
     location: []
-};
-
-let shareMap = {
-    share: null,
-    location: [],
 };

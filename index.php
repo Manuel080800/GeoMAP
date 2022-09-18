@@ -147,6 +147,7 @@
     <script src="js/color.js"></script>
     <script src="js/processing.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/location.js"></script>
     <script src="js/map.js"></script>
 
 </body>
