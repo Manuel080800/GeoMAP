@@ -1,5 +1,5 @@
 function getLocation () {
-    const template = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
         ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
         '<div class="modal-dialog modal-dialog-centered" role="document">' +
         '<div class="modal-content">' +
@@ -21,13 +21,13 @@ function getLocation () {
         '</div>' +
         '</div>' +
         '</div>';
-    document.getElementById("overall-modal").innerHTML = template;
     $("#message-modal").modal('toggle');
 }
 
 function shareLocation () {
-    var url_compartir = "http://localhost:63342//geomap/mapa.html?share=" + userID;
-    const template = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+    let user = generateId();
+    let url_share = server + "?share=" + user;
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
         ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
         '<div class="modal-dialog modal-dialog-centered" role="document">' +
         '<div class="modal-content">' +
@@ -38,22 +38,22 @@ function shareLocation () {
         '</button>' +
         '</div>' +
         '<div class="modal-body">' +
-        'Copie el siguiente enlace para compartir su mapa: <br/><br/>' +
-        "<input class='form-control' id='compartirURL' type='text' disabled value='" + url_compartir + "'>" +
+        '<span id="text-share">¿Como desea compartir esta ubicación?</span>' +
+        "<input class='form-control' id='share-url' style='display: none; margin-top: 10px' type='text' disabled value=''>" +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-primary"' + " onclick='" + 'copyCompartir("' + url_compartir +'")' + "'>Copiar</button>" +
+        '<button type="button" class="btn btn-primary" id="share-button-now"' + " onclick='" + 'shareSesion(0)' + "'>Sesión actual</button>" +
+        '<button type="button" class="btn btn-primary" id="share-button-new"' + " onclick='" + 'shareSesion(1)' + "'>Crear sesión</button>" +
         '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>' +
         '</div>' +
         '</div>' +
         '</div>' +
         '</div>';
-    document.getElementById("overall-modal").innerHTML = template;
     $("#message-modal").modal('toggle');
 }
 
 function removeAll () {
-    const template = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
         ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
         '<div class="modal-dialog modal-dialog-centered" role="document">' +
         '<div class="modal-content">' +
@@ -73,12 +73,11 @@ function removeAll () {
         '</div>' +
         '</div>' +
         '</div>';
-    document.getElementById("overall-modal").innerHTML = template;
     $("#message-modal").modal('toggle');
 }
 
 function removeLayer (index) {
-    const template = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
         ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
         '<div class="modal-dialog modal-dialog-centered" role="document">' +
         '<div class="modal-content">' +
@@ -98,6 +97,26 @@ function removeLayer (index) {
         '</div>' +
         '</div>' +
         '</div>';
-    document.getElementById("overall-modal").innerHTML = template;
+    $("#message-modal").modal('toggle');
+}
+
+function restoreSession () {
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="0" role="dialog"' +
+        ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">' +
+        '<div class="modal-dialog modal-dialog-centered" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">Sesión iniciada</h5>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        'Existe una sesión registrada anteriormente ¿desea restaurarla?' +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button type="button" class="btn btn-primary"' + "onclick='" + 'restoreLocation()' + "'" + ' data-dismiss="modal">Restaurar</button>' +
+        '<button type="button" class="btn btn-secondary"' + "onclick='" + 'removeLocation()' + "'" + ' data-dismiss="modal">Eliminar</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
     $("#message-modal").modal('toggle');
 }

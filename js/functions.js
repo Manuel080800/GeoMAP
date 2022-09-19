@@ -46,3 +46,34 @@ function download (filename, text) {
 
     document.body.removeChild(element);
 }
+
+function shareSesion (type) {
+
+    let url_share = server + "?share=";
+    url_share += type === 0 ? idShare : idShare = generateId();
+
+    if (markerMap['market'] !== null) url_share += "&radio=" + markerMap['radio'];
+
+    let input = document.getElementById("share-url");
+    input.style.display = "block";
+    input.value = url_share;
+    document.getElementById("text-share").innerText = "Se ha copiado el siguiente url a su portapapeles:";
+    document.getElementById("share-button-now").disabled= true;
+    document.getElementById("share-button-new").disabled= true;
+
+    copy(url_share);
+
+    if (mapLayers !== []) removeAndCreatedLocationShare(mapLayers);
+}
+
+function copy(text) {
+    const type = 'text/plain';
+    const blob = new Blob([text], {type});
+    let data = [new ClipboardItem({[type]: blob})];
+
+    navigator.clipboard.write(data).then(function() {
+        console.log('Copiado!')
+    }, function() {
+        console.log('Ups! No se copio');
+    });
+}

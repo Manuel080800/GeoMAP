@@ -19,9 +19,9 @@ function locationUser () {
 
 
         const coords = [e.latlng.lat , e.latlng.lng];
-        const range = document.getElementById("input-range").value
+        markerMap['radio'] = document.getElementById("input-range").value
         markerMap['market'] = L.marker(coords, {icon: locationIcon}).bindPopup('Ubicacion del usuario');
-        markerMap['position'] = L.circle(coords, Number(range), circleOptions)
+        markerMap['position'] = L.circle(coords, Number(markerMap['radio']), circleOptions)
 
         map.addLayer(markerMap['market']);
         markerMap['position'].addTo(map);
@@ -36,7 +36,6 @@ function locationUser () {
             [location[1], location[3]]]);
         markerMap['location'] = location;
 
-        showShare();
         addLocationMap(location[0],location[1],location[2],location[3],false, true);
     });
 }

@@ -65,7 +65,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Amenity</label>
                         </div>
-                        <select class="custom-select" id="amenity" onchange="drawItemSelect(0, 'amenity', true)">
+                        <select class="custom-select" id="amenity" onchange="drawItemSelect(0, 'amenity', true, true)">
                             <option selected>Choose...</option>
                         </select>
                     </div>
@@ -75,7 +75,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Highway</label>
                         </div>
-                        <select class="custom-select" id="highway" onchange="drawItemSelect(1, 'highway', true)">
+                        <select class="custom-select" id="highway" onchange="drawItemSelect(1, 'highway', true, true)">
                             <option selected>Choose...</option>
                         </select>
                     </div>
@@ -85,7 +85,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Way</label>
                         </div>
-                        <select class="custom-select" id="way" onchange="drawItemSelect(2, 'way', true)">
+                        <select class="custom-select" id="way" onchange="drawItemSelect(2, 'way', true, true)">
                             <option selected>Choose...</option>
                         </select>
                     </div>
@@ -115,7 +115,7 @@
         </div>
         <div id="layer-list">
             <div class="d-flex gap-5 justify-content-center" id="element-box">
-                <div class="list-group mx-0 w-auto" id="inner-layers" style="padding-right: 11px;"></div>
+                <div class="list-group mx-0 w-auto" id="inner-layers" style="padding-right: 25px;"></div>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@
     <script src="js/init.js"></script>
     <script src="js/data.js"></script>
     <script src="js/user.js"></script>
-    <script src="js/cookies.js"></script>
+    <script src="js/cookie.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/color.js"></script>
@@ -149,6 +149,9 @@
     <script src="js/search.js"></script>
     <script src="js/location.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/sesion.js"></script>
 
 </body>
 </html>

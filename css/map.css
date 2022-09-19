@@ -106,7 +106,7 @@ nav {
     justify-content: flex-end;
     max-height: 200px;
     overflow: overlay;
-    right: 0;
+    right: 11px;
     bottom: 30px;
     flex-direction: column-reverse;
 }

@@ -53,6 +53,5 @@ map.on('draw:created', function (e) {
     map.fitBounds([[location[0], location[2]],
                    [location[1], location[3]]]);
     markerMap['location'] = location;
-    showShare();
     addLocationMap(location[0],location[1],location[2],location[3],true, true);
 });

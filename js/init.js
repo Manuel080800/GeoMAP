@@ -15,4 +15,3 @@ function finish() {
 }
 
 loading();
-window.onload = (function () { finish() });

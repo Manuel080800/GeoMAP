@@ -12,6 +12,7 @@ function removeAllMap (all, modal, home) {
         removeCap(markerMap['market']);
         removeCap(markerMap['position']);
         markerMap['location'] = [];
+        markerMap['radio'] = null;
         removeDraw();
     }
 
@@ -77,6 +78,8 @@ function updateComponents () {
             const select = document.getElementById("element" + index);
             select.checked = layer['enable']
     });
+
+    if (mapLayers !== []) removeAndCreatedLocation(mapLayers);
 }
 
 function layerSelect (id) {
