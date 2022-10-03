@@ -72,7 +72,7 @@ function drawItemSelect (option, name, modal, end) {
         }
 
         if (option === 1) {
-            popupContent = "<p>" + feature.properties.amenity.toUpperCase() + "</p>";
+            popupContent = "<p>" + feature.properties.highway.toUpperCase() + "</p>";
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
@@ -191,7 +191,7 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
         }
 
         if (option === 1) {
-            popupContent = "<p>" + feature.properties.amenity.toUpperCase() + "</p>";
+            popupContent = "<p>" + feature.properties.highway.toUpperCase() + "</p>";
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
