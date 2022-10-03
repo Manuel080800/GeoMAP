@@ -1,0 +1,58 @@
+{
+   "html_attributions" : [],
+   "results" : [
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 20.5336203,
+               "lng" : -89.3330481
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 20.53501327989272,
+                  "lng" : -89.33169957010728
+               },
+               "southwest" : {
+                  "lat" : 20.53231362010728,
+                  "lng" : -89.33439922989272
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/civic_building-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/civic-bldg_pinlet",
+         "name" : "Palacio Municipal de Tekit",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3000,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/101978616382008046289\"\u003eGilma Tuyub\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRiNWRpH9SLT8jLpj2ypzqjhpF5_Ermn-gRaRZBnL60Xn1r83rFN89IkqeEshJZRW7cK6Y3iG1CkyC83aWohU3Do1NnnaMh4iZMsQLuDHDKFuU5Dnuq8pw6HBevar7wME1zy3XD2JXsd9sPGlfJrllwEcde7gUzggZoBZV5NNOUXnvjK",
+               "width" : 4000
+            }
+         ],
+         "place_id" : "ChIJW6d8fhH3Vo8RTq8vLrXKoFU",
+         "plus_code" : {
+            "compound_code" : "GMM8+CQ Tekit, Yucatan",
+            "global_code" : "76GGGMM8+CQ"
+         },
+         "rating" : 4.9,
+         "reference" : "ChIJW6d8fhH3Vo8RTq8vLrXKoFU",
+         "scope" : "GOOGLE",
+         "types" : [
+            "city_hall",
+            "point_of_interest",
+            "local_government_office",
+            "establishment"
+         ],
+         "user_ratings_total" : 8,
+         "vicinity" : "C. 27 178, Centro, Tekit"
+      }
+   ],
+   "status" : "OK"
+}

@@ -120,3 +120,23 @@ function restoreSession () {
         '</div>';
     $("#message-modal").modal('toggle');
 }
+
+function getDetailsPlace (data) {
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+        ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">' +
+        '<div class="modal-dialog modal-dialog-centered" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">Información de la ubicación</h5>' +
+        '</div>' +
+        '<div class="modal-body" style="overflow-wrap: break-word;">' +
+        JSON.stringify(data) +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    $("#message-modal").modal('toggle');
+}
