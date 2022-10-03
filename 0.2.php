@@ -14,14 +14,19 @@ $html = curl_exec($ch);
 $location = json_decode($html);
 
 $geojson = null;
-if(!empty($location->elements)){
-   if ($_POST["type"] == 0 || $_POST["type"] == 1) $geojson = Overpass2Geojson::convertNodes($html,false);
-   if ($_POST["type"] == 2) $geojson = Overpass2Geojson::convertWays($html,false);
-}
+if ($_POST["type"] == 0 || $_POST["type"] == 1) $geojson = Overpass2Geojson::convertNodes($html,false);
+if ($_POST["type"] == 2) $geojson = Overpass2Geojson::convertWays($html,false);
+
+$myfile = fopen("newfile2.json", "w") or die("Unable to open file!");
+
+fwrite($myfile, json_encode($geojson));
+fclose($myfile);
 
 $request = array(
     "url" => $query[$_POST["type"]],
     "data" => $geojson
 );
+
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode($request);
 ?>

@@ -1,3 +1,5 @@
+let ajax = []
+
 function checkSession () {
     const sql = "SELECT * FROM `sesion-location` WHERE `sesion` = '" + id + "';";
     const column = ['sesion', 'lat1', 'lat2', 'lon1', 'lon2', 'location', 'type', 'enable']
@@ -10,7 +12,11 @@ function checkSession () {
         data: {"database": "geomap","type": 1, "sql": sql, "size": 8, "column": column},
         success: function (result) {
             try {
-                let requestPHP = JSON.parse(result);
+                const responseError = "Lo sentimos. No se pudo encontrar una coincidencia. Inténtelo de nuevo.";
+                console.log(result)
+                if (responseError === result) return exits;
+                // let requestPHP = JSON.parse(result);
+                let requestPHP = result;
                 let elememts = [];
 
                 for (element in requestPHP) {
@@ -35,7 +41,8 @@ function restoreLocation () {
     $.post(server + "connection.php",
         {"database": "geomap","type": 1, "sql": sql, "size": 8, "column": column}).done(
         function (result) {
-            let requestPHP = JSON.parse(result);
+            // let requestPHP = JSON.parse(result);
+            let requestPHP = result;
             let elememts = [];
 
             for (element in requestPHP) {
@@ -53,7 +60,11 @@ function restoreLocation () {
                            [location[1], location[3]]]);
             markerMap['location'] = location;
             showShare();
-            addLocationMap(location[0],location[1],location[2],location[3],true, false);
+            const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],true, false);
+
+            $.when.apply($, locationAjax).then(function() {
+                console.log("termine el ajaxLocation")
+            });
 
             markerMap['market'] = null;
             markerMap['position'] = L.rectangle([[location[0], location[2]],
@@ -65,12 +76,21 @@ function restoreLocation () {
             console.log(elememts[0][0].length)
 
             for (let i = 0; i < elememts[0][0].length; i ++) {
-                if ((i + 1) === elememts[0][0].length) drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
-                elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, true);
+                if ((i + 1) === elememts[0][0].length) {
+                    ajax.push(drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
+                        elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, true));
+                }
 
-                else drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
-                elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, false);
+                else{
+                    ajax.push(drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
+                        elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, false));
+                }
             }
+
+            $.when.apply($, ajax).then(function() {
+                console.log("termine el ajax")
+            });
+
         }
     );
 }
@@ -81,7 +101,8 @@ function restoreLocationShare (idShare, radio) {
     $.post(server + "connection.php",
         {"database": "geomap","type": 1, "sql": sql, "size": 8, "column": column}).done(
         function (result) {
-            let requestPHP = JSON.parse(result);
+            // let requestPHP = JSON.parse(result);
+            let requestPHP = result;
             let elememts = [];
 
             for (element in requestPHP) {
@@ -99,23 +120,23 @@ function restoreLocationShare (idShare, radio) {
                 [location[1], location[3]]]);
             markerMap['location'] = location;
             showShare();
-            addLocationMap(location[0],location[1],location[2],location[3],false, false);
+            addLocationMap(location[0], location[1], location[2], location[3], false, false);
 
-            console.log(Number(location[0]) + Number((location[1] - location[0])/2))
-            console.log(Number(location[2]) + Number((location[3] - location[2])/2))
+            console.log(Number(location[0]) + Number((location[1] - location[0]) / 2))
+            console.log(Number(location[2]) + Number((location[3] - location[2]) / 2))
 
             markerMap['market'] = null;
             markerMap['position'] = !radio ?
                 L.rectangle([[location[0], location[2]], [location[1], location[3]]], {color: "#3388FF", weight: 2}) :
-                L.circle([Number(location[0]) + Number((location[1] - location[0])/2),
-                          Number(location[2]) + Number((location[3] - location[2])/2)],
-                          Number(radio), {color: '#CFB87F', fillColor: '#F5EAD8', fillOpacity: 0.5});
+                L.circle([Number(location[0]) + Number((location[1] - location[0]) / 2),
+                        Number(location[2]) + Number((location[3] - location[2]) / 2)],
+                    Number(radio), {color: '#CFB87F', fillColor: '#F5EAD8', fillOpacity: 0.5});
             markerMap['position'].addTo(map);
 
             const type = ['amenity', 'highway', 'way'];
             console.log(elememts[0][0].length)
 
-            for (let i = 0; i < elememts[0][0].length; i ++) {
+            for (let i = 0; i < elememts[0][0].length; i++) {
                 if ((i + 1) === elememts[0][0].length) drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
                     elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, true);
 

@@ -36,6 +36,9 @@ function locationUser () {
             [location[1], location[3]]]);
         markerMap['location'] = location;
 
-        addLocationMap(location[0],location[1],location[2],location[3],false, true);
+        const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],false, true);
+        $.when.apply($, locationAjax).then(function() {
+            console.log("termine el ajaxLocation")
+        });
     });
 }

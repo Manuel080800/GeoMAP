@@ -125,7 +125,6 @@
             Este sitio utiliza cookies para mejorar tu experiencia. Si continua, entonces estará de acuerdo con esto.
             <div class='buttons'>
                 <button class='item' onclick="hideCookie()">Acepto</button>
-                <a class='item' href='#' target='_blank'>Leer más</a>
             </div>
         </div>
     </div>

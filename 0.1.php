@@ -57,6 +57,11 @@ for ($i = 0; $i < 2; $i++) {
     }
 }
 
+$myfile = fopen("newfile.json", "w") or die("Unable to open file!");
+
+fwrite($myfile, json_encode($json_data));
+fclose($myfile);
+
 $amenity = array_values(array_unique($amenity));
 $highway = array_values(array_unique($highway));
 $ways = array_values(array_unique($ways));
@@ -64,10 +69,11 @@ $ways = array_values(array_unique($ways));
 $request = array(
     "amenity"=> $amenity,
     "highway"=> $highway,
-    "way"=> $ways,
-    "url"=> $query[0],
-    "data" => $json_data
+    "way"=> $ways //,
+    // "url"=> $query[0],
+    // "data" => $json_data
 );
 
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode($request);
 ?>

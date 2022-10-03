@@ -53,5 +53,9 @@ map.on('draw:created', function (e) {
     map.fitBounds([[location[0], location[2]],
                    [location[1], location[3]]]);
     markerMap['location'] = location;
-    addLocationMap(location[0],location[1],location[2],location[3],true, true);
+
+    const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],true, true);
+    $.when.apply($, locationAjax).then(function() {
+        console.log("termine el ajaxLocation")
+    });
 });

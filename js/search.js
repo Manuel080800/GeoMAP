@@ -1,13 +1,22 @@
 function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
     if (modal) loading();
-    $.post(server + "0.1.php", {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2}).done(
-        function (result) {
+    return $.ajax({
+        type: "POST",
+        url: server + "0.1.php",
+        dataType: 'json',
+        async: true,
+        data: {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2},
+        beforeSend: function () {
+            // if (modal) loading();
+        },
+        success: function (result) {
             console.log(result)
             try {
-                let requestPHP = JSON.parse(result);
+                // let requestPHP = JSON.parse(result);
+                let requestPHP = result;
                 let elememts = [];
 
-                for(element in requestPHP) {
+                for (element in requestPHP) {
                     if (element !== null) {
                         elememts.push(requestPHP[element]);
                     }
@@ -16,15 +25,17 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
                 addOptions("amenity", elememts[0]);
                 addOptions("highway", elememts[1]);
                 addOptions("way", elememts[2]);
-                $("#address").val(elememts[3]);
-                markerMap['data'] = elememts[4];
+                // $("#address").val(elememts[3]);
+                // markerMap['data'] = elememts[4];
+                $("#address").val('');
+                markerMap['data'] = null;
                 if (end) finish();
             } catch (error) {
                 console.log(error)
                 if (end) finish();
             }
         }
-    );
+    });
 }
 
 function drawItemSelect (option, name, modal, end) {
@@ -58,14 +69,25 @@ function drawItemSelect (option, name, modal, end) {
                                           lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
         layer.bindPopup(popupContent);
     }
-    
-    $.post(server + "0.2.php", {"name": select, "type": option, "lat1": markerMap['location'][0],
-        "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]}).done(
-        function (result) {
+
+    const drawAjax = $.ajax({
+        type: "POST",
+        url: server + "0.2.php",
+        dataType: 'json',
+        async: true,
+        data: {
+            "name": select, "type": option, "lat1": markerMap['location'][0],
+            "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]
+        },
+        beforeSend: function () {
+            // if (modal) loading();
+        },
+        success: function (result) {
             console.log(result)
             try {
 
-                let requestPHP = JSON.parse(result);
+                // let requestPHP = JSON.parse(result);
+                let requestPHP = result;
                 let elememts = [];
 
                 for (element in requestPHP) {
@@ -116,7 +138,11 @@ function drawItemSelect (option, name, modal, end) {
                 if (end) finish();
             }
         }
-    );
+    });
+
+    $.when.apply($, drawAjax).then(function() {
+        console.log("termine el item ajax")
+    });
 }
 
 function drawItemSelectRestore (option, select, type, enable, modal, end) {
@@ -144,13 +170,24 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
         layer.bindPopup(popupContent);
     }
 
-    $.post(server + "0.2.php", {"name": select, "type": option, "lat1": markerMap['location'][0],
-        "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]}).done(
-        function (result) {
+    return $.ajax({
+        type: "POST",
+        url: server + "0.2.php",
+        dataType: 'json',
+        async: true,
+        data: {
+            "name": select, "type": option, "lat1": markerMap['location'][0],
+            "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]
+        },
+        beforeSend: function () {
+            // loading();
+        },
+        success: function(result) {
             console.log(result)
             try {
 
-                let requestPHP = JSON.parse(result);
+                // let requestPHP = JSON.parse(result);
+                let requestPHP = result;
                 let elememts = [];
 
                 for (element in requestPHP) {
@@ -163,7 +200,6 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
 
                 const colorMarket = generateRandomColor(false);
                 const colorWay = option !== 2 ? "#" + colorMarket : generateRandomColor(true);
-
                 const geo = L.geoJSON(elememts[1], {
                     pointToLayer: function (feature, latlng) {
                         const icon = new L.Icon({
@@ -201,5 +237,5 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
                 if (end) finish();
             }
         }
-    );
+    });
 }

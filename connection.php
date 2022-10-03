@@ -43,6 +43,7 @@ if ($_POST['type']== 1) {
             }
 
             $json = array("data" => $data);
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode($json);
         }
     } else {
