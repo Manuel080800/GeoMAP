@@ -1,6 +1,6 @@
 <?php
 
-$query = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$_POST["lat"].','.$_POST["lon"].'&radius=1500&type='.rawurlencode($_POST["type"]).'&keyword='.rawurlencode($_POST["name"]).'&key=AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE';
+$query = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$_POST["lat"].','.$_POST["lon"].'&radius=10&type='.rawurlencode($_POST["type"]).'&keyword='.rawurlencode($_POST["name"]).'&key=AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE';
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

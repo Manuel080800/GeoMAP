@@ -5,53 +5,123 @@
          "business_status" : "OPERATIONAL",
          "geometry" : {
             "location" : {
-               "lat" : 20.5336203,
-               "lng" : -89.3330481
+               "lat" : 20.5342885,
+               "lng" : -89.3328063
             },
             "viewport" : {
                "northeast" : {
-                  "lat" : 20.53501327989272,
-                  "lng" : -89.33169957010728
+                  "lat" : 20.53564637989273,
+                  "lng" : -89.33150962010728
                },
                "southwest" : {
-                  "lat" : 20.53231362010728,
-                  "lng" : -89.33439922989272
+                  "lat" : 20.53294672010728,
+                  "lng" : -89.33420927989272
                }
             }
          },
-         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/civic_building-71.png",
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
          "icon_background_color" : "#7B9EB0",
-         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/civic-bldg_pinlet",
-         "name" : "Palacio Municipal de Tekit",
-         "opening_hours" : {
-            "open_now" : true
-         },
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+         "name" : "Iglesia San Antonio de Padua",
          "photos" : [
             {
-               "height" : 3000,
+               "height" : 3907,
                "html_attributions" : [
-                  "\u003ca href=\"https://maps.google.com/maps/contrib/101978616382008046289\"\u003eGilma Tuyub\u003c/a\u003e"
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/103702776009413347455\"\u003eIrving Ek Herrera\u003c/a\u003e"
                ],
-               "photo_reference" : "AcYSjRiNWRpH9SLT8jLpj2ypzqjhpF5_Ermn-gRaRZBnL60Xn1r83rFN89IkqeEshJZRW7cK6Y3iG1CkyC83aWohU3Do1NnnaMh4iZMsQLuDHDKFuU5Dnuq8pw6HBevar7wME1zy3XD2JXsd9sPGlfJrllwEcde7gUzggZoBZV5NNOUXnvjK",
-               "width" : 4000
+               "photo_reference" : "AcYSjRjRqUBTLU4pJ_wTDFVpeUflUNK7XfB_SKDygg5_eGXp2kGHHJJXPWIlD9suW5xe8RCMuUAickllVOzboJCVzfTr_OeKLfgLcLP6dIjmXXsB-itud0NW-evv1VHEjLWi69NMbiy4Dr6RiDF3FFIPRNBw49e32RNs-r4bw6fpuMjatbbb",
+               "width" : 2442
             }
          ],
-         "place_id" : "ChIJW6d8fhH3Vo8RTq8vLrXKoFU",
+         "place_id" : "ChIJ5QyIb0X3Vo8RCk5dRo27yuc",
          "plus_code" : {
-            "compound_code" : "GMM8+CQ Tekit, Yucatan",
-            "global_code" : "76GGGMM8+CQ"
+            "compound_code" : "GMM8+PV Centro, Tekit, Yucatan",
+            "global_code" : "76GGGMM8+PV"
          },
-         "rating" : 4.9,
-         "reference" : "ChIJW6d8fhH3Vo8RTq8vLrXKoFU",
+         "rating" : 4.8,
+         "reference" : "ChIJ5QyIb0X3Vo8RCk5dRo27yuc",
          "scope" : "GOOGLE",
-         "types" : [
-            "city_hall",
-            "point_of_interest",
-            "local_government_office",
-            "establishment"
+         "types" : [ "church", "place_of_worship", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 40,
+         "vicinity" : "97680 Centro,, C. 26 202C, Centro"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 20.5346081,
+               "lng" : -89.33309299999999
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 20.53599522989272,
+                  "lng" : -89.33173402010726
+               },
+               "southwest" : {
+                  "lat" : 20.53329557010728,
+                  "lng" : -89.33443367989271
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+         "name" : "Catedral",
+         "photos" : [
+            {
+               "height" : 1146,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108862076113400282635\"\u003eA Google User\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRjnUrUfh50BthApMpgrGuzyP6Hg8tCSijr1Oa2cH9yFj0l-bm3fK3olGM04dueVYSgjRuA3THqFBhomu0kMtxy7p0PkrRycWnHgccuEjTDoVxV_FUVGLyiQY8-eMyCWyr3F7MRekW78Ad7WYGZWpuxotgX5gabFTRmITBbxx0m114Nf",
+               "width" : 947
+            }
          ],
-         "user_ratings_total" : 8,
-         "vicinity" : "C. 27 178, Centro, Tekit"
+         "place_id" : "ChIJSXqAzFD3Vo8R1LGs17Xmudw",
+         "plus_code" : {
+            "compound_code" : "GMM8+RQ Tekit, Yucatan",
+            "global_code" : "76GGGMM8+RQ"
+         },
+         "rating" : 0,
+         "reference" : "ChIJSXqAzFD3Vo8R1LGs17Xmudw",
+         "scope" : "GOOGLE",
+         "types" : [ "church", "place_of_worship", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "C. 23 203, Centro, Tekit"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 20.534574,
+               "lng" : -89.3302611
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 20.53596867989272,
+                  "lng" : -89.32890782010726
+               },
+               "southwest" : {
+                  "lat" : 20.53326902010727,
+                  "lng" : -89.33160747989271
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+         "name" : "El divino Salvador",
+         "place_id" : "ChIJ0--o7vz3Vo8RYUQba3hAEQM",
+         "plus_code" : {
+            "compound_code" : "GMM9+RV Tekit, Yucatan",
+            "global_code" : "76GGGMM9+RV"
+         },
+         "rating" : 5,
+         "reference" : "ChIJ0--o7vz3Vo8RYUQba3hAEQM",
+         "scope" : "GOOGLE",
+         "types" : [ "church", "place_of_worship", "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "C. 23 184, Tekit"
       }
    ],
    "status" : "OK"

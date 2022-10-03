@@ -52,23 +52,41 @@ function drawItemSelect (option, name, modal, end) {
         console.log(feature)
         const lat = feature.geometry.coordinates[1];
         const lon = feature.geometry.coordinates[0];
+        const akey = "AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE";
         const style = "style='padding: 8px; background-color: green; color: white; " +
-                      "border-radius: 8px; text-decoration: none;'";
+            "border-radius: 8px; text-decoration: none;'";
+        const style_details = "style='padding: 8px; background-color: #d9d9d9; color: black; " +
+            "border-radius: 8px; text-decoration: none; margin-top: 5px; display: inline-block; " +
+            "cursor: pointer;'";
         let popupContent = "";
-        
+
         if (option === 0) {
             popupContent = "<p>" + feature.properties.amenity.toUpperCase() + "</p>";
+            if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
+            popupContent += "<p> Latitud: " + lat + "</p>"
+            popupContent += "<p> Longitud: " + lon + "</p>"
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            layer.bindPopup(popupContent);
         }
 
-        if (option === 1 || option === 2) {
+        if (option === 1) {
+            popupContent = "<p>" + feature.properties.amenity.toUpperCase() + "</p>";
+            if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
+            popupContent += "<p> Latitud: " + lat + "</p>"
+            popupContent += "<p> Longitud: " + lon + "</p>"
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            layer.bindPopup(popupContent);
+        }
+
+        if (option === 2) {
             popupContent = "<p>" + feature.properties.highway.toUpperCase() + "</p>";
+            if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
+            layer.bindPopup(popupContent);
         }
-
-        if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
-        if (option !== 2) popupContent += "<a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" +
-                                          lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-
-        layer.bindPopup(popupContent).on('click', function() { alert('Clicked on a group!'); });
     }
 
     const drawAjax = $.ajax({
@@ -168,13 +186,25 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
             popupContent += "<p> Longitud: " + lon + "</p>"
             popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
             popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a><br\><br\>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
             layer.bindPopup(popupContent);
         }
 
-        if (option === 1 || option === 2) {
+        if (option === 1) {
+            popupContent = "<p>" + feature.properties.amenity.toUpperCase() + "</p>";
+            if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
+            popupContent += "<p> Latitud: " + lat + "</p>"
+            popupContent += "<p> Longitud: " + lon + "</p>"
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            layer.bindPopup(popupContent);
+        }
+
+        if (option === 2) {
             popupContent = "<p>" + feature.properties.highway.toUpperCase() + "</p>";
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
+            layer.bindPopup(popupContent);
         }
     }
 
