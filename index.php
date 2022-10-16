@@ -130,6 +130,7 @@
     </div>
 
     <!-- Add script end -->
+    <script src="https://kit.fontawesome.com/45786511e1.js" crossorigin="anonymous"></script>
     <script src="lib/leaflet/leaflet.js"></script>
     <script src="lib/leaflet/leaflet.draw.js"></script>
     <script src="lib/leaflet/leaflet.ajax.min.js"></script>

@@ -17,11 +17,6 @@ $geojson = null;
 if ($_POST["type"] == 0 || $_POST["type"] == 1) $geojson = Overpass2Geojson::convertNodes($html,false);
 if ($_POST["type"] == 2) $geojson = Overpass2Geojson::convertWays($html,false);
 
-$myfile = fopen("newfile2.json", "w") or die("Unable to open file!");
-
-fwrite($myfile, json_encode($geojson));
-fclose($myfile);
-
 $request = array(
     "url" => $query[$_POST["type"]],
     "data" => $geojson

@@ -6,13 +6,9 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
         dataType: 'json',
         async: true,
         data: {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2},
-        beforeSend: function () {
-            // if (modal) loading();
-        },
         success: function (result) {
             console.log(result)
             try {
-                // let requestPHP = JSON.parse(result);
                 let requestPHP = result;
                 let elememts = [];
 
@@ -25,8 +21,6 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
                 addOptions("amenity", elememts[0]);
                 addOptions("highway", elememts[1]);
                 addOptions("way", elememts[2]);
-                // $("#address").val(elememts[3]);
-                // markerMap['data'] = elememts[4];
                 $("#address").val('');
                 markerMap['data'] = null;
                 if (end) finish();
@@ -65,9 +59,9 @@ function drawItemSelect (option, name, modal, end) {
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
-            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=120&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
             popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name.replace(/["']/g, "") : '') + '"' + ")' " + style_details + ">Detalles</a>";
             layer.bindPopup(popupContent);
         }
 
@@ -76,9 +70,9 @@ function drawItemSelect (option, name, modal, end) {
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
-            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=120&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
             popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name.replace(/["']/g, "") : '') + '"' + ")' " + style_details + ">Detalles</a>";
             layer.bindPopup(popupContent);
         }
 
@@ -98,14 +92,10 @@ function drawItemSelect (option, name, modal, end) {
             "name": select, "type": option, "lat1": markerMap['location'][0],
             "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]
         },
-        beforeSend: function () {
-            // if (modal) loading();
-        },
         success: function (result) {
             console.log(result)
             try {
 
-                // let requestPHP = JSON.parse(result);
                 let requestPHP = result;
                 let elememts = [];
 
@@ -184,9 +174,9 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
-            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=120&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
             popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name.replace(/["']/g, "") : '') + '"' + ")' " + style_details + ">Detalles</a>";
             layer.bindPopup(popupContent);
         }
 
@@ -195,9 +185,9 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
             if (feature.properties.name) popupContent += "<p>" + feature.properties.name + "</p>";
             popupContent += "<p> Latitud: " + lat + "</p>"
             popupContent += "<p> Longitud: " + lon + "</p>"
-            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=270&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
+            popupContent += '<img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + lat + ',' + lon + '&heading=120&pitch=-0.76&key=' + akey + '" style="width:100%; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">'
             popupContent += "<br\><br\><a href='https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + "' target='_blank' " + style + ">Google maps</a><br\><br\>";
-            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name : '') + '"' + ")' " + style_details + ">Detalles</a>";
+            popupContent += "<a onclick='getPlaceID(" + lat + ", " + lon + ', "' + feature.properties.amenity + '", "' + (feature.properties.name ? feature.properties.name.replace(/["']/g, "") : '') + '"' + ")' " + style_details + ">Detalles</a>";
             layer.bindPopup(popupContent);
         }
 
@@ -208,7 +198,7 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
         }
     }
 
-    return $.ajax({
+    return setTimeout(function () { $.ajax({
         type: "POST",
         url: server + "0.2.php",
         dataType: 'json',
@@ -217,14 +207,10 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
             "name": select, "type": option, "lat1": markerMap['location'][0],
             "lat2": markerMap['location'][1], "lon1": markerMap['location'][2], "lon2": markerMap['location'][3]
         },
-        beforeSend: function () {
-            // loading();
-        },
         success: function(result) {
             console.log(result)
             try {
 
-                // let requestPHP = JSON.parse(result);
                 let requestPHP = result;
                 let elememts = [];
 
@@ -275,7 +261,7 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
                 if (end) finish();
             }
         }
-    });
+    })}, 1000);
 }
 
 function getPlaceID(lat, lon, type, name) {
@@ -284,25 +270,44 @@ function getPlaceID(lat, lon, type, name) {
 
     const ajaxID = $.ajax({
         type: "POST",
-        url: server + "0.3.1.php",
+        url: server + "0.3.php",
         dataType: 'json',
         async: true,
         data: { "lat": lat, "lon": lon, "type": type, "name": name },
-        beforeSend: function () {
-            // loading();
-        },
         error: function (error) {
-            console.log(error)
-            console.log(error["responseText"]);
+            finish();
+            setMessageError(error["responseText"]);
             finish()},
         success: function(result) {
-            console.log(result);
-            finish();
-            getDetailsPlace(result['data'])
+            result['details_place'].length > 0 ? getInformationPlace(result['details_place']) :
+                                                 getDetailsPlace(null, false)
         }
     });
 
     $.when.apply($, ajaxID).then(function() {
-        console.log("termine el idajax")
+        console.log("termine el id ajax")
+    });
+}
+
+function getInformationPlace(data) {
+    if (data.length > 1) {finish(); getDetailsPlace(data, false); return;}
+    const ajaxPlace = $.ajax({
+        type: "POST",
+        url: server + "0.4.php",
+        dataType: 'json',
+        async: true,
+        data: { "json": data[0]},
+        error: function (error) {
+            finish();
+            setMessageError(error["responseText"]);
+        },
+        success: function(result) {
+            finish();
+            getDetailsPlace(result, true);
+        }
+    });
+
+    $.when.apply($, ajaxPlace).then(function() {
+        console.log("termine el information ajax")
     });
 }

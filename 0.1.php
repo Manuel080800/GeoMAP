@@ -57,21 +57,34 @@ for ($i = 0; $i < 2; $i++) {
     }
 }
 
-$myfile = fopen("newfile.json", "w") or die("Unable to open file!");
+$countAmenity = array_count_values($amenity);
+ksort($countAmenity);
+$amenitySort = array();
+foreach ($countAmenity as $key => $val) {
+    array_push($amenitySort, $key);
+}
 
-fwrite($myfile, json_encode($json_data));
-fclose($myfile);
+$countHighway = array_count_values($highway);
+ksort($countHighway);
+$highwaySort = array();
+foreach ($countHighway as $key => $val) {
+    array_push($highwaySort, $key);
+}
 
-$amenity = array_values(array_unique($amenity));
-$highway = array_values(array_unique($highway));
-$ways = array_values(array_unique($ways));
+$countWays = array_count_values($ways);
+ksort($countWays);
+$waysSort = array();
+foreach ($countWays as $key => $val) {
+    array_push($waysSort, $key);
+}
 
 $request = array(
-    "amenity"=> $amenity,
-    "highway"=> $highway,
-    "way"=> $ways //,
-    // "url"=> $query[0],
-    // "data" => $json_data
+    "amenity"=> $amenitySort,
+    "highway"=> $highwaySort,
+    "way"=> $waysSort,
+    "amenity2"=> $countAmenity,
+    "highway2"=> $countHighway,
+    "way2"=> $countWays
 );
 
 header('Content-Type: application/json; charset=utf-8');
