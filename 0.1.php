@@ -58,21 +58,21 @@ for ($i = 0; $i < 2; $i++) {
 }
 
 $countAmenity = array_count_values($amenity);
-ksort($countAmenity);
+arsort($countAmenity, SORT_NUMERIC);
 $amenitySort = array();
 foreach ($countAmenity as $key => $val) {
     array_push($amenitySort, $key);
 }
 
 $countHighway = array_count_values($highway);
-ksort($countHighway);
+arsort($countHighway, SORT_NUMERIC);
 $highwaySort = array();
 foreach ($countHighway as $key => $val) {
     array_push($highwaySort, $key);
 }
 
 $countWays = array_count_values($ways);
-ksort($countWays);
+arsort($countWays, SORT_NUMERIC);
 $waysSort = array();
 foreach ($countWays as $key => $val) {
     array_push($waysSort, $key);

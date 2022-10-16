@@ -7,12 +7,12 @@ function updateRank (rank) {
     component.innerHTML = "Rango actual: " + rank + " metros."
 }
 
-function addOptions (element, options) {
+function addOptions (element, options, sizes) {
     let menu = document.getElementById(element);
     options.forEach((option) => {
         let add = document.createElement("option");
-        add.setAttribute("value", "value");
-        let value = document.createTextNode(option);
+        add.setAttribute("value", option);
+        let value = document.createTextNode(option + ' - ' + sizes[option]);
         add.appendChild(value);
         menu.appendChild(add);
     });

@@ -18,9 +18,9 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
                     }
                 }
 
-                addOptions("amenity", elememts[0]);
-                addOptions("highway", elememts[1]);
-                addOptions("way", elememts[2]);
+                addOptions("amenity", elememts[0], elememts[3]);
+                addOptions("highway", elememts[1], elememts[4]);
+                addOptions("way", elememts[2], elememts[5]);
                 $("#address").val('');
                 markerMap['data'] = null;
                 if (end) finish();
@@ -35,7 +35,7 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
 function drawItemSelect (option, name, modal, end) {
     if (modal) loading();
     const menu = document.getElementById(name);
-    const select = menu.options[menu.selectedIndex].text;
+    const select = menu.options[menu.selectedIndex].value;
 
     if (checkSelection(select) || checkLayer(select)) {
         if (modal) finish();
@@ -279,8 +279,12 @@ function getPlaceID(lat, lon, type, name) {
             setMessageError(error["responseText"]);
             finish()},
         success: function(result) {
-            result['details_place'].length > 0 ? getInformationPlace(result['details_place']) :
-                                                 getDetailsPlace(null, false)
+            if (result['details_place'].length > 0) {
+                getInformationPlace(result['details_place'])
+            } else {
+                finish();
+                getDetailsPlace(null, false);
+            }
         }
     });
 
