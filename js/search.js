@@ -141,6 +141,7 @@ function drawItemSelect (option, name, modal, end) {
 
                 if (end) finish();
                 showShare();
+                showControl();
 
             } catch (error) {
                 console.log(error)
@@ -255,6 +256,7 @@ function drawItemSelectRestore (option, select, type, enable, modal, end) {
 
                 if (end) finish();
                 showShare();
+                showControl();
 
             } catch (error) {
                 console.log(error)
@@ -279,6 +281,7 @@ function getPlaceID(lat, lon, type, name) {
             setMessageError(error["responseText"]);
             finish()},
         success: function(result) {
+            console.log(result)
             if (result['details_place'].length > 0) {
                 getInformationPlace(result['details_place'])
             } else {

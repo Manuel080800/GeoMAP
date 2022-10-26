@@ -113,6 +113,12 @@
                 <img src="img/share.png" alt="">
             </button>
         </div>
+        <div id="control-map" class="style-control control-rigth control-top-five control-hide" onclick="controlPlace()"
+             title="Control de mapa">
+            <button>
+                <img src="img/select.png" alt="">
+            </button>
+        </div>
         <div id="layer-list">
             <div class="d-flex gap-5 justify-content-center" id="element-box">
                 <div class="list-group mx-0 w-auto" id="inner-layers" style="padding-right: 25px;"></div>

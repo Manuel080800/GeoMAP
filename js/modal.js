@@ -42,8 +42,8 @@ function shareLocation () {
         "<input class='form-control' id='share-url' style='display: none; margin-top: 10px' type='text' disabled value=''>" +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-primary" id="share-button-now"' + " onclick='" + 'shareSesion(0)' + "'>Sesión actual</button>" +
-        '<button type="button" class="btn btn-primary" id="share-button-new"' + " onclick='" + 'shareSesion(1)' + "'>Crear sesión</button>" +
+        '<button type="button" class="btn btn-primary" id="share-button-now"' + " onclick='" + 'shareSesion(0)' + "'>Mapa actual</button>" +
+        '<button type="button" class="btn btn-primary" id="share-button-new"' + " onclick='" + 'shareSesion(1)' + "'>Mapa actualizado</button>" +
         '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>' +
         '</div>' +
         '</div>' +
@@ -245,5 +245,30 @@ function setMessageError (error) {
         '</div>' +
         '</div>';
 
+    $("#message-modal").modal('toggle');
+}
+
+function controlPlace () {
+    document.getElementById("overall-modal").innerHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+        ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+        '<div class="modal-dialog modal-dialog-centered" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">Control de mapa</h5>' +
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        '¿Desea realizar una acción sobre todas las ubicaciones del mapa?' +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button type="button" class="btn btn-primary"' + "onclick='" + 'controlLayer(1)' + "'>Visualizar</button>'" +
+        '<button type="button" class="btn btn-secondary"' + "onclick='" + 'controlLayer(2)' + "'>Alternar</button>'" +
+        '<button type="button" class="btn btn-secondary"' + "onclick='" + 'controlLayer(3)' + "'>Ocultar</button>'" +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
     $("#message-modal").modal('toggle');
 }

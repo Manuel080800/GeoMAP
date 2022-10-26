@@ -60,6 +60,7 @@ function restoreLocation () {
                            [location[1], location[3]]]);
             markerMap['location'] = location;
             showShare();
+            showControl();
             const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],true, false);
 
             $.when.apply($, locationAjax).then(function() {
@@ -120,6 +121,7 @@ function restoreLocationShare (idShare, radio) {
                 [location[1], location[3]]]);
             markerMap['location'] = location;
             showShare();
+            showControl();
             addLocationMap(location[0], location[1], location[2], location[3], false, false);
 
             console.log(Number(location[0]) + Number((location[1] - location[0]) / 2))

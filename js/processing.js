@@ -6,6 +6,7 @@ function removeAllMap (all, modal, home) {
     mapLayers = [];
     document.getElementById("inner-layers").innerHTML = "";
     hideShare();
+    hideControl();
 
     if (all) {
         removeSearchOption();
@@ -38,6 +39,14 @@ function hideShare () {
 
 function showShare () {
     document.getElementById("control-location").style.display = "block";
+}
+
+function hideControl () {
+    document.getElementById("control-map").style.display = "none";
+}
+
+function showControl () {
+    document.getElementById("control-map").style.display = "block";
 }
 
 function updateComponents () {
@@ -124,4 +133,13 @@ function viewGeoJSON () {
         let view = window.open("");
         view.document.write(JSON.stringify(markerMap['data']));
     }
+}
+
+function controlLayer(mode) {
+    removeMap();
+    for (let index = 0; index < mapLayers.length; index ++) {
+        mode === 1 ? mapLayers[index]['enable'] = true : mode === 2 ? mapLayers[index]['enable'] = !mapLayers[index]['enable'] : mapLayers[index]['enable'] = false;
+    }
+    updateComponents();
+    $("#message-modal").modal('toggle');
 }
