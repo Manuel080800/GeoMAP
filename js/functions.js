@@ -7,12 +7,13 @@ function updateRank (rank) {
     component.innerHTML = "Rango actual: " + rank + " metros."
 }
 
-function addOptions (element, options, sizes) {
+function addOptions (element, options, sizes, extend = false) {
     let menu = document.getElementById(element);
-    options.forEach((option) => {
+    options.forEach((option, index) => {
         let add = document.createElement("option");
         add.setAttribute("value", option);
-        let value = document.createTextNode(option + ' - ' + sizes[option]);
+        let value = extend === false ? document.createTextNode(option + ' - ' + sizes[option]) :
+                                       document.createTextNode(option + ' - ' + sizes[index]);
         add.appendChild(value);
         menu.appendChild(add);
     });
@@ -76,4 +77,49 @@ function copy(text) {
     }, function() {
         console.log('Ups! No se copio');
     });
+}
+
+function addPlace (base, now) {
+    for (let i = 0; i < now['elements'].length; i ++) {
+        const index = base['elements'].indexOf(now['elements'][i])
+        if (index !== -1) {
+            base['multiple'][now['elements'][i]] += now['multiple'][now['elements'][i]]
+        } else {
+            base['elements'].push(now['elements'][i])
+            base['multiple'][now['elements'][i]] = now['multiple'][now['elements'][i]]
+        }
+    }
+}
+
+function addPlace2 (base, now) {
+    for (let i = 0; i < now['elements'].length; i ++) {
+        const index = base['elements'].indexOf(now['elements'][i])
+        if (index !== -1) {
+            base['multiple'][index] += now['multiple'][now['elements'][i]]
+        } else {
+            base['elements'].push(now['elements'][i])
+            base['multiple'].push(now['multiple'][now['elements'][i]])
+        }
+    }
+}
+
+function sortObjectbyValue(object){
+    let sortable = [];
+    let objectSortable = {}
+
+    for (let element in object) {
+        sortable.push([element, object[element]]);
+    }
+
+    sortable.sort(function(a, b) {
+        return a[1] - b[1];
+    });
+
+    sortable.reverse();
+
+    sortable.forEach(element => {
+        objectSortable [element[0]] = element[1]
+    })
+
+    return objectSortable
 }

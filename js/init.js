@@ -29,6 +29,22 @@ function loading() {
     });
 }
 
+function loadingGrid() {
+    return new Promise((resolve, reject) => {
+        try {
+            $('body').loadingModal('destroy');
+            $('body').loadingModal({
+                text: '<b>Cargando</b>',
+                eText: ['Esto puede demorar un poco, por favor espere...']
+            });
+            $('body').loadingModal('show');
+            resolve();
+        } catch (error) {
+            reject(new Error("Fallo la tarea de carga"));
+        }
+    });
+}
+
 function finish() {
     $('body').loadingModal('hide');
 }

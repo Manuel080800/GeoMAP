@@ -142,6 +142,7 @@
     <script src="lib/leaflet/leaflet.ajax.min.js"></script>
     <script src="lib/leaflet-minimap/Control.MiniMap.min.js"></script>
     <script src="lib/leaflet-legends/leaflet.legend.js"></script>
+    <script src="lib/axios/axios.js"></script>
     <script src="lib/layers/barrios.js"></script>
     <script src="lib/cookie/cookie.js"></script>
     <script src="js/init.js"></script>
@@ -154,6 +155,7 @@
     <script src="js/processing.js"></script>
     <script src="js/search.js"></script>
     <script src="js/location.js"></script>
+    <script src="js/grid.js"></script>
     <script src="js/map.js"></script>
     <script src="js/database.js"></script>
     <script src="js/share.js"></script>

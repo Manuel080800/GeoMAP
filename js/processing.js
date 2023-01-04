@@ -12,9 +12,18 @@ function removeAllMap (all, modal, home) {
         removeSearchOption();
         removeCap(markerMap['market']);
         removeCap(markerMap['position']);
+        removeDraw();
+        removeGrid();
         markerMap['location'] = [];
         markerMap['radio'] = null;
-        removeDraw();
+        gridMap['now'] = []
+        gridMap['data'] = []
+        gridMap['locations'] = []
+        gridMap['markets'] = []
+        gridMap['locations_now'] = []
+        gridMap['index_grid'] = null
+        enableGrid = false
+        modeGrid = 0;
     }
 
     if (modal) $("#message-modal").modal('toggle');
@@ -22,7 +31,15 @@ function removeAllMap (all, modal, home) {
 }
 
 function removeMap () {
-    mapLayers.forEach((layer) => layer['data'].removeFrom(map));
+    if (enableGrid) {
+        mapLayers.forEach((layer) => layer['data'].forEach((element) => element.removeFrom(map)));
+    } else {
+        mapLayers.forEach((layer) => layer['data'].removeFrom(map));
+    }
+}
+
+function removeGrid () {
+    gridMap.markets.forEach((layer) => layer.removeFrom(map));
 }
 
 function removeCap (layer) {
@@ -78,8 +95,16 @@ function updateComponents () {
             '</div>' +
             '</div>';
         document.getElementById("inner-layers").appendChild(element);
-        if (mapLayers[index]['enable'] === true) {
-            mapLayers[index]['data'].addTo(map);
+        if (enableGrid) {
+            if (mapLayers[index]['enable'] === true) {
+                mapLayers[index]['data'].forEach(element => {
+                    element.addTo(map);
+                })
+            }
+        } else {
+            if (mapLayers[index]['enable'] === true) {
+                mapLayers[index]['data'].addTo(map);
+            }
         }
     }
 
@@ -142,4 +167,11 @@ function controlLayer(mode) {
     }
     updateComponents();
     $("#message-modal").modal('toggle');
+}
+
+function selectGrid () {
+    // removeGrid()
+    // gridMap['markets'][gridMap['index_grid']] = L.rectangle([[gridMap['locations'][gridMap['index_grid']][0], gridMap['locations'][gridMap['index_grid']][2]], [gridMap['locations'][gridMap['index_grid']][1], gridMap['locations'][gridMap['index_grid']][3]]], {color: "#ffffff", weight: 2})
+    // gridMap['markets'] = crearteGridMarket(gridMap['locations'])
+
 }

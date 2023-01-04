@@ -44,6 +44,14 @@ map.on('draw:drawstart', function () {
 });
 
 map.on('draw:created', function (e) {
+
+    console.log(e)
+
+    // Width
+    console.log(map.distance(L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getWest()), L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getEast())))
+    // Heigth
+    console.log(map.distance(L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getWest()), L.latLng(e.layer.getBounds().getNorth(), e.layer.getBounds().getWest())))
+
     editableLayers.addLayer(e.layer);
     let location = [e.layer.getBounds().getSouth(),
                     e.layer.getBounds().getNorth(),
@@ -53,9 +61,27 @@ map.on('draw:created', function (e) {
     map.fitBounds([[location[0], location[2]],
                    [location[1], location[3]]]);
     markerMap['location'] = location;
+    gridMap['now'] = location;
 
-    const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],true, true);
-    $.when.apply($, locationAjax).then(function() {
-        console.log("termine el ajaxLocation")
-    });
+    const distanceBaseWidth = gridMap['base'][0]
+    const distanceBaseHeigth = gridMap['base'][1]
+
+    const distanceNowWidth = map.distance(L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getWest()),
+                             L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getEast()))
+    const distanceNowHeigth = map.distance(L.latLng(e.layer.getBounds().getSouth(), e.layer.getBounds().getWest()),
+                             L.latLng(e.layer.getBounds().getNorth(), e.layer.getBounds().getWest()))
+
+    gridMap['data'].push(getDifferenceLocation(distanceBaseWidth, distanceNowWidth, gridMap['now'], true))
+    gridMap['data'].push(getDifferenceLocation(distanceBaseHeigth, distanceNowHeigth, gridMap['now'], false))
+
+    gridMap['locations'] = getGrid(gridMap['data'], gridMap['now'])
+
+    if (gridMap['locations'] && gridMap['locations'].length > 0) {
+        searchAll();
+    } else {
+        const locationAjax = addLocationMap(location[0],location[1],location[2],location[3],true, true);
+        $.when.apply($, locationAjax).then(function() {
+            console.log("termiine el ajaxLocation")
+        });
+    }
 });

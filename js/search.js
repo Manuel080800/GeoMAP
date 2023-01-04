@@ -32,13 +32,23 @@ function addLocationMap (lat1, lat2, lon1, lon2, modal, end) {
     });
 }
 
+function addLocationMapAxios (lat1, lat2, lon1, lon2) {
+    return axios.post(server + "0.1.1.php", {"lat1": lat1, "lat2": lat2, "lon1": lon1, "lon2": lon2})
+}
+
 function drawItemSelect (option, name, modal, end) {
     if (modal) loading();
     const menu = document.getElementById(name);
     const select = menu.options[menu.selectedIndex].value;
 
-    if (checkSelection(select) || checkLayer(select)) {
+    if ((checkSelection(select) || checkLayer(select)) && modeGrid !== 1) {
         if (modal) finish();
+        return;
+    }
+
+    if (enableGrid) {
+        gridDrawItemSelect(name, select, option)
+        console.log("es grid")
         return;
     }
 
@@ -153,6 +163,11 @@ function drawItemSelect (option, name, modal, end) {
     $.when.apply($, drawAjax).then(function() {
         console.log("termine el item ajax")
     });
+}
+
+function drawItemSelectMapAxios(type, name, lat1, lat2, lon1, lon2) {
+    return axios.post(server + "0.2.1.php", { "name": name, "type": type, "lat1": lat1,
+                                              "lat2": lat2, "lon1": lon1, "lon2": lon2 })
 }
 
 function drawItemSelectRestore (option, select, type, enable, modal, end) {
