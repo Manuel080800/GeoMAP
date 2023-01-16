@@ -231,7 +231,7 @@ function gridDrawItemSelect (name, select, type) {
                 console.log(feature)
                 const lat = feature.geometry.coordinates[1];
                 const lon = feature.geometry.coordinates[0];
-                const akey = "AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE";
+                const akey = "AIzaSyCXoz_2n1LLHf29EXEBXLLQYgSBG-yA9lk";
                 const style = "style='padding: 8px; background-color: green; color: white; " +
                     "border-radius: 8px; text-decoration: none;'";
                 const style_details = "style='padding: 8px; background-color: #d9d9d9; color: black; " +
@@ -386,7 +386,7 @@ function gridDrawItemSelectRestore (axiosDraw, axiosIndex, now) {
                 console.log(feature)
                 const lat = feature.geometry.coordinates[1];
                 const lon = feature.geometry.coordinates[0];
-                const akey = "AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE";
+                const akey = "AIzaSyCXoz_2n1LLHf29EXEBXLLQYgSBG-yA9lk";
                 const style = "style='padding: 8px; background-color: green; color: white; " +
                     "border-radius: 8px; text-decoration: none;'";
                 const style_details = "style='padding: 8px; background-color: #d9d9d9; color: black; " +
