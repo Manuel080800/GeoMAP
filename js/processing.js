@@ -160,6 +160,31 @@ function viewGeoJSON () {
     }
 }
 
+async function downloadGeoJSON (type, name, lat1, lat2, log1, log2, lat1_1, lat2_1, log1_1, log2_1) {
+    const position_array = lat1_1 ? ['https://www.overpass-api.de/api/interpreter?data=[out:json];(node["amenity"="' + name + '"](' + lat1_1 + ',' + log1_1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(node["highway"="' + name + '"](' + lat1_1 + ',' + _1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(way["highway"="' + name + '"](' + lat1_1 + ',' + log1_1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;'] :
+            ['https://www.overpass-api.de/api/interpreter?data=[out:json];(node["amenity"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(node["highway"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(way["highway"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;']
+    let json = await (await fetch(position_array[type])).json();
+    download("GeoJSON.json", JSON.stringify(json));
+}
+
+async function viewGeoJSON (type, name, lat1, lat2, log1, log2, lat1_1, lat2_1, log1_1, log2_1) {
+    const position_array = lat1_1 ? ['https://www.overpass-api.de/api/interpreter?data=[out:json];(node["amenity"="' + name + '"](' + lat1_1 + ',' + log1_1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(node["highway"="' + name + '"](' + lat1_1 + ',' + _1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(way["highway"="' + name + '"](' + lat1_1 + ',' + log1_1 + ',' + lat2_1 + ',' + log2_1 + ');node(w)->.x;);out;'] :
+            ['https://www.overpass-api.de/api/interpreter?data=[out:json];(node["amenity"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(node["highway"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;',
+            'https://www.overpass-api.de/api/interpreter?data=[out:json];(way["highway"="' + name + '"](' + lat1 + ',' + log1 + ',' + lat2 + ',' + log2 + ');node(w)->.x;);out;']
+
+    let json = await (await fetch(position_array[type])).json();
+    let view = window.open("");
+    view.document.write(JSON.stringify(json));
+}
+
+
 function controlLayer(mode) {
     removeMap();
     for (let index = 0; index < mapLayers.length; index ++) {

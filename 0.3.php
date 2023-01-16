@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 
-$query = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$_POST["lat"].','.$_POST["lon"].'&radius=10&type='.rawurlencode($_POST["type"]).'&keyword='.rawurlencode($_POST["name"]).'&key=AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE';
+$query = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='.$_POST["lat"].','.$_POST["lon"].'&radius=10&type='.rawurlencode($_POST["type"]).'&keyword='.rawurlencode($_POST["name"]).'&key=AIzaSyCXoz_2n1LLHf29EXEBXLLQYgSBG-yA9lk';
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -21,7 +21,7 @@ $detail_url = array();
 $detail_places = array();
 
 for ($i = 0; $i < count($ID_Place); $i++) {
-    $query_detaill = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='.$ID_Place[$i].'&key=AIzaSyCiiGMDYKNmN1tSiWbYWg2Yt9Dy73OFmqE';
+    $query_detaill = 'https://maps.googleapis.com/maps/api/place/details/json?place_id='.$ID_Place[$i].'&key=AIzaSyCXoz_2n1LLHf29EXEBXLLQYgSBG-yA9lk';
     array_push($detail_url, $query_detaill);
 
     $ch = curl_init();

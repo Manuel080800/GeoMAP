@@ -52,11 +52,11 @@
                            aria-label="" aria-describedby="basic-addon1" placeholder="URL de la consulta" disabled>
                 </li>
                 <li class="nav-item spacing-inter">
-                    <a href="javascript:viewGeoJSON()"
+                    <a href="javascript:listArchive()"
                        class="size_Element btn btn-outline-secondary mb-3 spacing text-nowrap" type="button">Ver archivo</a>
                 </li>
                 <li class="nav-item spacing-inter">
-                    <a href="javascript:downloadGeoJSON()"
+                    <a href="javascript:listDownload()"
                        class="size_Element btn btn-outline-secondary mb-3 spacing text-nowrap" type="button">Descargar
                         archivo</a>
                 </li>
@@ -149,7 +149,6 @@
     <script src="js/data.js"></script>
     <script src="js/user.js"></script>
     <script src="js/cookie.js"></script>
-    <script src="js/modal.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/color.js"></script>
     <script src="js/processing.js"></script>
@@ -158,6 +157,7 @@
     <script src="js/grid.js"></script>
     <script src="js/map.js"></script>
     <script src="js/database.js"></script>
+    <script src="js/modal.js"></script>
     <script src="js/share.js"></script>
     <script src="js/sesion.js"></script>
 

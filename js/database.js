@@ -34,6 +34,39 @@ function checkSession () {
     return (exits > 0);
 }
 
+function getList () {
+    const sql = "SELECT * FROM `sesion-location` WHERE `sesion` = '" + id + "';";
+    const column = ['sesion', 'lat1', 'lat2', 'lon1', 'lon2', 'location', 'type', 'enable', 'lat1_grid',
+        'lat2_grid', 'lon1_grid', 'lon2_grid', 'type_grid']
+    let elememts = [];
+
+    $.ajax({
+        type: "POST",
+        url: server + "connection.php",
+        async: false,
+        data: {"database": "geomap","type": 1, "sql": sql, "size": 13, "column": column},
+        success: function (result) {
+            try {
+                const responseError = "Lo sentimos. No se pudo encontrar una coincidencia. Inténtelo de nuevo.";
+                console.log(result)
+                if (responseError === result) return exits;
+                // let requestPHP = JSON.parse(result);
+                let requestPHP = result;
+
+                for (element in requestPHP) {
+                    if (element !== null) {
+                        elememts.push(requestPHP[element]);
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    });
+
+    return elememts;
+}
+
 function restoreLocation () {
     let ajax = []
     const sql = "SELECT * FROM `sesion-location` WHERE `sesion` = '" + id + "';";
@@ -183,9 +216,10 @@ function restoreLocation () {
 
 function restoreLocationShare (idShare, radio) {
     const sql = "SELECT * FROM `share-location` WHERE `share` = '" + idShare + "';";
-    const column = ['share', 'lat1', 'lat2', 'lon1', 'lon2', 'location', 'type', 'enable']
+    const column = ['share', 'lat1', 'lat2', 'lon1', 'lon2', 'location', 'type', 'enable', 'lat1_grid',
+        'lat2_grid', 'lon1_grid', 'lon2_grid', 'type_grid']
     $.post(server + "connection.php",
-        {"database": "geomap","type": 1, "sql": sql, "size": 8, "column": column}).done(
+        {"database": "geomap","type": 1, "sql": sql, "size": 13, "column": column}).done(
         function (result) {
             // let requestPHP = JSON.parse(result);
             let requestPHP = result;
@@ -205,30 +239,122 @@ function restoreLocationShare (idShare, radio) {
             map.fitBounds([[location[0], location[2]],
                 [location[1], location[3]]]);
             markerMap['location'] = location;
+            modeGrid = elememts[0][12][0] === null ? 0 : parseInt(elememts[0][12][0]);
             showShare();
             showControl();
-            addLocationMap(location[0], location[1], location[2], location[3], false, false);
 
-            console.log(Number(location[0]) + Number((location[1] - location[0]) / 2))
-            console.log(Number(location[2]) + Number((location[3] - location[2]) / 2))
+
+            if (modeGrid === 0) {
+                const locationAjax = addLocationMap(location[0], location[1], location[2], location[3], true, false);
+
+                $.when.apply($, locationAjax).then(function () {
+                    console.log("termine el ajaxLocation")
+                });
+            }
+
+            if (modeGrid === 1) {
+                loadingGrid()
+
+                gridMap['now'] = [parseFloat(elememts[0][1][0]),
+                    parseFloat(elememts[0][2][0]),
+                    parseFloat(elememts[0][3][0]),
+                    parseFloat(elememts[0][4][0])];
+
+                const distanceBaseWidth = gridMap['base'][0]
+                const distanceBaseHeigth = gridMap['base'][1]
+
+                const distanceNowWidth = map.distance(L.latLng(gridMap['now'][0], gridMap['now'][2]),
+                    L.latLng(gridMap['now'][0], gridMap['now'][3]))
+                const distanceNowHeigth = map.distance(L.latLng(gridMap['now'][0], gridMap['now'][2]),
+                    L.latLng(gridMap['now'][1], gridMap['now'][2]))
+
+                gridMap['data'].push(getDifferenceLocation(distanceBaseWidth, distanceNowWidth, gridMap['now'], true))
+                gridMap['data'].push(getDifferenceLocation(distanceBaseHeigth, distanceNowHeigth, gridMap['now'], false))
+
+                gridMap['locations'] = getGrid(gridMap['data'], gridMap['now'])
+            }
+
+            if (modeGrid === 2) {
+                loadingGrid()
+
+                gridMap['now'] = [parseFloat(elememts[0][8][0]),
+                    parseFloat(elememts[0][9][0]),
+                    parseFloat(elememts[0][10][0]),
+                    parseFloat(elememts[0][11][0])];
+
+                const distanceBaseWidth = gridMap['base'][0]
+                const distanceBaseHeigth = gridMap['base'][1]
+
+                const distanceNowWidth = map.distance(L.latLng(gridMap['now'][0], gridMap['now'][2]),
+                    L.latLng(gridMap['now'][0], gridMap['now'][3]))
+                const distanceNowHeigth = map.distance(L.latLng(gridMap['now'][0], gridMap['now'][2]),
+                    L.latLng(gridMap['now'][1], gridMap['now'][2]))
+
+                gridMap['data'].push(getDifferenceLocation(distanceBaseWidth, distanceNowWidth, gridMap['now'], true))
+                gridMap['data'].push(getDifferenceLocation(distanceBaseHeigth, distanceNowHeigth, gridMap['now'], false))
+
+                gridMap['locations'] = getGrid(gridMap['data'], gridMap['now'])
+            }
 
             markerMap['market'] = null;
-            markerMap['position'] = !radio ?
-                L.rectangle([[location[0], location[2]], [location[1], location[3]]], {color: "#3388FF", weight: 2}) :
-                L.circle([Number(location[0]) + Number((location[1] - location[0]) / 2),
-                        Number(location[2]) + Number((location[3] - location[2]) / 2)],
-                    Number(radio), {color: '#CFB87F', fillColor: '#F5EAD8', fillOpacity: 0.5});
+            markerMap['position'] = L.rectangle([[location[0], location[2]],
+                    [location[1], location[3]]],
+                {color: "#3388FF", weight: 2});
             markerMap['position'].addTo(map);
 
             const type = ['amenity', 'highway', 'way'];
             console.log(elememts[0][0].length)
 
-            for (let i = 0; i < elememts[0][0].length; i++) {
-                if ((i + 1) === elememts[0][0].length) drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
-                    elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, true);
+            if (modeGrid === 0) {
+                for (let i = 0; i < elememts[0][0].length; i ++) {
+                    if ((i + 1) === elememts[0][0].length) {
+                        ajax.push(drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
+                            elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, true));
+                    }
 
-                else drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
-                    elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, false);
+                    else{
+                        ajax.push(drawItemSelectRestore(type.indexOf(elememts[0][6][i]),
+                            elememts[0][5][i], elememts[0][6][i], elememts[0][7][i], false, false));
+                    }
+                }
+
+                $.when.apply($, ajax).then(function() {
+                    console.log("termine el ajax")
+                });
+            }
+
+            if (modeGrid === 1) {
+                const type = ['amenity', 'highway', 'way'];
+
+                let axiosDraw = []
+                let axiosIndex = []
+                gridLocationMap(1, false, false)
+
+                for (let i = 0; i < elememts[0][0].length; i ++) {
+                    axiosDraw.push(drawItemSelectMapAxios(type.indexOf(elememts[0][6][i]),
+                        elememts[0][5][i], elememts[0][8][i], elememts[0][9][i], elememts[0][10][i], elememts[0][11][i]))
+                    axiosIndex.push(i)
+                }
+
+                gridDrawItemSelectRestore(axiosDraw, axiosIndex, elememts);
+            }
+
+            if (modeGrid === 2) {
+                const type = ['amenity', 'highway', 'way'];
+
+                let axiosDraw = []
+                let axiosIndex = []
+                gridLocationMap(2, false, false)
+
+                for (let i = 0; i < elememts[0][0].length; i ++) {
+                    gridMap['locations'].forEach(element => {
+                        axiosDraw.push(drawItemSelectMapAxios(type.indexOf(elememts[0][6][i]),
+                            elememts[0][5][i], element[0], element[1], element[2], element[3]))
+                        axiosIndex.push(i)
+                    })
+                }
+
+                gridDrawItemSelectRestore(axiosDraw, axiosIndex, elememts);
             }
         }
     );

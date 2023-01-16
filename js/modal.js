@@ -296,3 +296,97 @@ function searchAll () {
         '</div>';
     $("#message-modal").modal('toggle');
 }
+
+function listArchive () {
+    let documentHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+        ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+        '<div class="modal-dialog modal-dialog-centered" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">Lista de ubicaciones</h5>' +
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        '<p>Seleccione una lista de ubicación de la lista:</p>' +
+        '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th scope="col">Location</th>' +
+        '<th scope="col">Type</th>' +
+        '<th scope="col">Position</th>' +
+        '<th scope="col">Action</th>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>';
+
+    const recovery = getList()
+    console.log(recovery)
+
+    for (let i = 0; i < recovery[0][5].length; i ++) {
+        const position = recovery[0][8][i] ? "" + recovery[0][8][i] + "\n" + recovery[0][9][i] + "\n" + recovery[0][10][i] + "\n" + recovery[0][11][i] :
+            "" + recovery[0][1][i] + "\n" + recovery[0][2][i] + "\n" + recovery[0][3][i] + "\n" + recovery[0][4][i]
+
+        documentHTML += '<tr>' +
+                        '<td>' + recovery[0][5][i] + '</td>' +
+                        '<td>' + recovery[0][6][i] + '</td>' +
+                        '<td>' + position + '</td>' +
+                        '<td><a style="text-decoration: none" href="javascript:viewGeoJSON(' + (recovery[0][6][i] === 'amenity' ? 0 : recovery[0][6][i] === 'highway' ? 2 : 3) + ",'" + recovery[0][5][i] + "'," + recovery[0][1][i] + "," + recovery[0][2][i] + "," + recovery[0][3][i] + "," + recovery[0][4][i] + "," + recovery[0][8][i] + "," + recovery[0][9][i] + "," + recovery[0][10][i] + "," + recovery[0][11][i] + ')" <i class="fa-solid fa-eye"></i></a></td>' +
+                        '</tr>'
+    }
+
+    documentHTML += '</tbody></table></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    document.getElementById("overall-modal").innerHTML = documentHTML
+    $("#message-modal").modal('toggle');
+}
+
+function listDownload () {
+    let documentHTML = '<div class="modal fade" id="message-modal" tabindex="-1" role="dialog"' +
+        ' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">' +
+        '<div class="modal-dialog modal-dialog-centered" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLongTitle">Lista de ubicaciones</h5>' +
+        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        '<p>Seleccione una lista de ubicación de la lista:</p>' +
+        '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th scope="col">Location</th>' +
+        '<th scope="col">Type</th>' +
+        '<th scope="col">Position</th>' +
+        '<th scope="col">Action</th>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>';
+
+    const recovery = getList()
+    console.log(recovery)
+
+    for (let i = 0; i < recovery[0][5].length; i ++) {
+        const position = recovery[0][8][i] ? "" + recovery[0][8][i] + "\n" + recovery[0][9][i] + "\n" + recovery[0][10][i] + "\n" + recovery[0][11][i] :
+            "" + recovery[0][1][i] + "\n" + recovery[0][2][i] + "\n" + recovery[0][3][i] + "\n" + recovery[0][4][i]
+
+        documentHTML += '<tr>' +
+            '<td>' + recovery[0][5][i] + '</td>' +
+            '<td>' + recovery[0][6][i] + '</td>' +
+            '<td>' + position + '</td>' +
+            '<td><a style="text-decoration: none" href="javascript:downloadGeoJSON(' + (recovery[0][6][i] === 'amenity' ? 0 : recovery[0][6][i] === 'highway' ? 2 : 3) + ",'" + recovery[0][5][i] + "'," + recovery[0][1][i] + "," + recovery[0][2][i] + "," + recovery[0][3][i] + "," + recovery[0][4][i] + "," + recovery[0][8][i] + "," + recovery[0][9][i] + "," + recovery[0][10][i] + "," + recovery[0][11][i] + ')" <i class="fa-solid fa-download"></i></a></td>' +
+            '</tr>'
+    }
+
+    documentHTML += '</tbody></table></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    document.getElementById("overall-modal").innerHTML = documentHTML
+    $("#message-modal").modal('toggle');
+}
